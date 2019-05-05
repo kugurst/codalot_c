@@ -3,61 +3,10 @@
 #include <cstdlib>
 #include <ctime>
 
+#include "Knight.h"
+
 using namespace std;
 
-class Knight {
-private:
-    int xp;
-    int stamina;
-    bool inTavern;
-    bool inTrainingYard;
-
-public:
-    Knight() {
-        xp = 0;
-        stamina = 0;
-    }
-
-    int getXp() {
-        return xp;
-    }
-
-    void setXp(int xp) {
-        this->xp = xp;
-    }
-
-    void incrementXp(int xp) {
-        this->xp += xp;
-    }
-
-    int getStamina() {
-        return stamina;
-    }
-
-    void setStamina(int stamina) {
-        this->stamina = stamina;
-    }
-
-    void incrementStamina(int stamina) {
-        this->stamina += stamina;
-    }
-
-    bool isInTavern() {
-        return inTavern;
-    }
-
-    void setInTavern(bool inTavern) {
-        this->inTavern = inTavern;
-    }
-
-    bool isInTrainingYard() {
-        return inTrainingYard;
-    }
-
-    void setInTrainingYard(bool inTrainingYard) {
-        this->inTrainingYard = inTrainingYard;
-    }
-};
 
 class Codalot {
 private:

@@ -1,4 +1,4 @@
-#include "knight_position.cpp"
+#include "knight_position.h"
 
 class Codalot {
 public:
