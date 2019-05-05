@@ -1,10 +1,12 @@
 #include <iostream>
 #include <cassert>
-#include "basic_codalot.cpp"
+#include "test_codalot.h"
+
+using namespace std;
 
 int main(int argc, char **argv) {
-    Codalot *codalot = (Codalot *)malloc(sizeof(BasicCodalot));
-    new(codalot) BasicCodalot;
+    TestCodalot *codalot = (TestCodalot *)malloc(sizeof(TestCodalot));
+    new(codalot) TestCodalot;
 
     codalot->setKnight(0, TAVERN);
     codalot->setKnight(1, TAVERN);

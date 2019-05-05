@@ -22,8 +22,8 @@ clean:
 	rm -rf *.o a.out a.exe main main.exe codalot_test codalot_test.exe
 
 test/codalot_test:
-	$(CXX) $(CXXFLAGS) test/codalot_test.cpp src/Knight.cpp -o test/main
+	$(CXX) $(CXXFLAGS) test/codalot_test.cpp test/test_codalot.cpp src/Knight.cpp src/Codalot.cpp -o test/main
 
 src/main: 
-	$(CXX) $(CXXFLAGS) src/main.cpp src/Knight.cpp -o src/main
+	$(CXX) $(CXXFLAGS) src/main.cpp src/Knight.cpp src/Codalot.cpp -o src/main
 

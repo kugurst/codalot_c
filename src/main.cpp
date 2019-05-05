@@ -3,76 +3,9 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "Knight.h"
+#include "Codalot.h"
 
 using namespace std;
-
-
-class Codalot {
-private:
-    vector<Knight *> knights;
-
-public:
-    Codalot() {}
-
-    void clearKnights() {
-        knights.resize(0);
-    }
-
-    void addKnightToTrainingYard(Knight& knight) {
-        knights.push_back(&knight);
-        knight.setInTrainingYard(true);
-        knight.setInTavern(false);
-    }
-
-    void addKnightToTavern(Knight& knight) {
-        knights.push_back(&knight);
-        knight.setInTavern(true);
-        knight.setInTrainingYard(false);
-    }
-
-    void process() {
-        for (auto it = knights.begin(); it != knights.end(); ++it) {
-            Knight *knight = *it;
-            knight->incrementStamina(knight->isInTavern() ? 1 : -1);
-            knight->incrementXp(knight->isInTrainingYard() ? 1 : 0);
-        }
-    }
-
-    void grantBonusXp() {
-        int bonusKnights = 0;
-        for (auto it = knights.begin(); it != knights.end(); ++it) {
-            Knight *knight = *it;
-            if (knight->getXp() >= 3) {
-                bonusKnights++;
-            }
-        }
-        if (bonusKnights == 3) {
-            for (auto it = knights.begin(); it != knights.end(); ++it) {
-                Knight *knight = *it;
-                if (knight->getXp() >= 3) {
-                    knight->setXp(knight->getXp() + 5);
-                }
-            }
-        }
-        if (bonusKnights == 5) {
-            for (auto it = knights.begin(); it != knights.end(); ++it) {
-                Knight *knight = *it;
-                if (knight->getXp() >= 3) {
-                    knight->setXp(knight->getXp() + 10);
-                }
-            }
-        }
-        if (bonusKnights == 6) {
-            for (auto it = knights.begin(); it != knights.end(); ++it) {
-                Knight *knight = *it;
-                if (knight->getXp() >= 3) {
-                    knight->setXp(knight->getXp() + 20);
-                }
-            }
-        }
-    }
-};
 
 int main(int argc, char **argv) {
     Codalot *codalot = (Codalot *)malloc(sizeof(Codalot));
