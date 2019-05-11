@@ -1,13 +1,6 @@
 #include "test_codalot.h"
 
-TestCodalot::TestCodalot() {
-    for (int i = 0; i < 6; ++i) {
-        Knight *knight = (Knight *)malloc(sizeof(Knight));
-        new(knight) Knight;
-
-        knights.push_back(knight);
-    }
-}
+TestCodalot::TestCodalot(int numKnights) : Codalot(numKnights) {}
 
 void TestCodalot::setKnight(int id, KnightPosition position) {
     Knight *knight = knights[id];
@@ -23,13 +16,4 @@ void TestCodalot::setKnight(int id, KnightPosition position) {
             break;
         }
     }
-}
-
-int TestCodalot::calculateEarnedXp() {
-    int total = 0;
-    for (auto it = knights.begin(); it != knights.end(); ++it) {
-        Knight *knight = *it;
-        total += knight->getXp();
-    }
-    return total;
 }

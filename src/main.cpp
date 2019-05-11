@@ -1,43 +1,56 @@
-#include <vector>
-#include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <stdexcept>
+#include <string>
+#include <iostream>
+#include <vector>
 
 #include "Codalot.h"
 
 using namespace std;
 
 int main(int argc, char **argv) {
-    Codalot *codalot = (Codalot *)malloc(sizeof(Codalot));
-    new(codalot) Codalot;
 
-    vector<Knight> knights;
-    for (int i = 0; i < 6; ++i) {
-        Knight *knight = (Knight *)malloc(sizeof(Knight));
-        new(knight) Knight;
+    Codalot *codalot = nullptr; 
 
-        knights.push_back(*knight);
+    if(argc > 1){
+        string arg = argv[1];
+        int numKnights;
+        try {
+            size_t pos;
+            numKnights = std::stoi(arg, &pos);
+            if (pos < arg.size()) {
+                std::cerr << "Trailing characters after number: " << arg << '\n';
+            }
+        } 
+        catch (std::invalid_argument const &ex) {
+            std::cerr << "Invalid number: " << arg << '\n';
+            return -1;
+        } 
+        catch (std::out_of_range const &ex) {
+            std::cerr << "Number out of range: " << arg << '\n';
+            return -1;
+        }
+        
+        if( numKnights > -1 ) {
+            codalot = new Codalot(numKnights);
+        }
+        else {
+            std::cerr << "Number out of range: " << arg << '\n';
+            return -1;
+        }
+    }
+    
+    if(codalot == nullptr) { 
+        codalot = new Codalot();
     }
 
-    for (int i = 0; i < 24; ++i) {
-        codalot->clearKnights();
-        for (auto it = knights.begin(); it != knights.end(); ++it) {
-            Knight& knight = *it;
-            int randomVal = rand() % 2;
-            if (randomVal == 0) {
-                codalot->addKnightToTrainingYard(knight);
-            } else if (randomVal == 1) {
-                codalot->addKnightToTavern(knight);
-            }
-        }
-        codalot->process();
+    for(int i = 0; i < 24; ++i) {
+        codalot->timeInterval();
     }
     codalot->grantBonusXp();
 
-    int totalXp = 0;
-    for (auto it = knights.begin(); it != knights.end(); ++it) {
-        Knight& knight = *it;
-        totalXp += knight.getXp();
-    }
-    cout << "Total XP earned by all " << knights.size() << " knights: " << totalXp << endl;
+    cout << "Total XP earned by all " << codalot->getNumberOfKnights() << " knights: " << codalot->calculateEarnedXp() << endl;
+
+    delete codalot;
 }

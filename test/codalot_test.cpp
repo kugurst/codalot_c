@@ -5,8 +5,8 @@
 using namespace std;
 
 int main(int argc, char **argv) {
-    TestCodalot *codalot = (TestCodalot *)malloc(sizeof(TestCodalot));
-    new(codalot) TestCodalot;
+    
+    TestCodalot* codalot = new TestCodalot(6);
 
     codalot->setKnight(0, TAVERN);
     codalot->setKnight(1, TAVERN);
@@ -17,4 +17,6 @@ int main(int argc, char **argv) {
     codalot->process();
 
     assert(codalot->calculateEarnedXp() == 4);
+
+    delete codalot;
 }
